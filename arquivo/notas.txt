@@ -1,0 +1,4 @@
+$ npx create-next-app podcastrnext
+$ yarn add -D typescript @types/react @types/node
+// converter arquivos *.js para *.tsx
+$ yarn add sass
