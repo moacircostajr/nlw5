@@ -2,6 +2,7 @@ import { parseISO, format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Head from 'next/head'
 import Link from 'next/link'
 import { api } from '../services/api'
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString'
@@ -26,6 +27,9 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
   const { playList } = usePlayer()
   return (
     <div className={styles.homepage}>
+      <Head>
+        <title>Home | Podcastr</title>
+      </Head>
       <section className={styles.latestEpisodes}>
         <h2>Últimos lançamentos</h2>
         <ul>

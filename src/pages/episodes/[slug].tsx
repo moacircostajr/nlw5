@@ -9,6 +9,7 @@ import styles from './episode.module.scss'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { usePlayer } from '../../contexts/PlayerContext'
+import Head from 'next/head'
 
 export default function Episode(episode: IEpisode) {
   // FALLBACK TRUE
@@ -19,6 +20,9 @@ export default function Episode(episode: IEpisode) {
 
   return (
     <div className={styles.episode}>
+      <Head>
+        <title>{episode.title} | Podcastr</title>
+      </Head>
       <div className={styles.thumbnailContainer}>
         <Link href="/">
           <button type="button">
