@@ -23,6 +23,12 @@
 
 // font-size padrão = 16px
 
+@media (max-width: 1366px) {
+  html {
+    font-size: 80%;
+  }
+}
+
 @media (max-width: 1080px) {
   html {
     font-size: 93.75%; // serve de base para o rem: 0,9375 * 16 = 15px (rem padrão = 16px)
