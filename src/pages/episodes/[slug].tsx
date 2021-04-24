@@ -8,11 +8,14 @@ import { convertDurationToTimeString } from '../../utils/convertDurationToTimeSt
 import styles from './episode.module.scss'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { usePlayer } from '../../contexts/PlayerContext'
 
 export default function Episode(episode: IEpisode) {
   // FALLBACK TRUE
   // const route = useRouter()
   // if (route.isFallback) return <p>Carregando...</p>
+
+  const { play } = usePlayer()
 
   return (
     <div className={styles.episode}>
@@ -28,7 +31,7 @@ export default function Episode(episode: IEpisode) {
           src={episode.thumbnail}
           objectFit="cover"
         />
-        <button type="button">
+        <button type="button" onClick={() => play(episode)}>
           <img src="/play.svg" alt="Tocar episódio" />
         </button>
       </div>
