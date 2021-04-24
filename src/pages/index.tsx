@@ -8,6 +8,8 @@ import { api } from '../services/api'
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString'
 import styles from './home.module.scss'
 import IEpisode from '../protocols/IEpisode'
+import { useContext } from 'react'
+import { PlayerContext } from '../contexts/PlayerContext'
 
 type HomeProps = {
   latestEpisodes: Array<IEpisode>
@@ -21,13 +23,13 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
   //     .then((data) => console.log(data))
   // }, [])
 
-  const router = useRouter()
+  const { play } = useContext(PlayerContext)
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
         <h2>Últimos lançamentos</h2>
         <ul>
-          {latestEpisodes.map((episode) => (
+          {latestEpisodes.map((episode: IEpisode) => (
             <li key={episode.id}>
               <Image
                 width={192}
@@ -44,7 +46,12 @@ export default function Home({ allEpisodes, latestEpisodes }: HomeProps) {
                 <span>{episode.publishedAt}</span>
                 <span>{episode.durationAsString}</span>
               </div>
-              <button type="button">
+              <button
+                type="button"
+                onClick={() => {
+                  play(episode)
+                }}
+              >
                 <img src="/play-green.svg" alt="Tocar episodio" />
               </button>
             </li>
@@ -128,8 +135,8 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
-  const latestEpisodes = episodes.slice(0, 2)
-  const allEpisodes = episodes.slice(2, episodes.length)
+  const latestEpisodes: IEpisode[] = episodes.slice(0, 2)
+  const allEpisodes: IEpisode[] = episodes.slice(2, episodes.length)
 
   return {
     // props: {

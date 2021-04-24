@@ -7,8 +7,13 @@ import { ptBR } from 'date-fns/locale'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
 import styles from './episode.module.scss'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 export default function Episode(episode: IEpisode) {
+  // FALLBACK TRUE
+  // const route = useRouter()
+  // if (route.isFallback) return <p>Carregando...</p>
+
   return (
     <div className={styles.episode}>
       <div className={styles.thumbnailContainer}>
@@ -43,10 +48,12 @@ export default function Episode(episode: IEpisode) {
   )
 }
 
+// deve ser usado em toda pagina nomeada com colchete (pagina estatica gerada dinamicamente)
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [],
-    fallback: 'blocking'
+    paths: [], // armazena as paginas estaticas
+    fallback: 'blocking' // determina o comportamento do next ao não encontrar a pagina solicitada. false = erro 404/ true = tentar buscar dados informados na api. nesse caso a chamada é realizada pelo browser. requer a apresentação de mensagem de carregamento. / 'blocking' = faz a requisição pela camada do node
+    // fallback: true ou 'blocking = incremental static regeneration
   }
 }
 
